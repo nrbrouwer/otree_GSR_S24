@@ -1,0 +1,105 @@
+{{ block title }}
+    Decision Round
+{{ endblock }}
+{{ block content }}
+<!--
+Added some basic CSS here to make the buttons for the color choices larger to avoid miss-clicks. However, the buttons
+still aren't particularly pretty
+-->
+<style>
+    .button {
+        padding: 25px 25px;
+        text-align: center;
+        display: inline-block;
+        font-size: 25px;
+        color: white;
+        font-weight: bold;
+        margin: 0 25px;
+        border: none;
+        outline: none;
+    }
+    .button-blue {
+        background-color: blue;
+    }
+    .button-red {
+        background-color: red;
+    }
+</style>
+<p>
+    Your assigned color preference is
+        {{ if player.prefer_blue }}
+            <span style="color: blue; font-weight: bold;">Blue</span>
+        {{ else }}
+            <span style="color: red; font-weight: bold;">Red</span>
+        {{ endif }}
+</p>
+
+
+<p>
+    Which color would you like to vote for?
+</p>
+
+<button name="color_choice" type="submit" value="True" class="button button-blue">Blue</button>
+<button name="color_choice" type="submit" value="False" class="button button-red">Red</button>
+
+<!--
+Repeating the instructions information below. Should just be able to use the include_sibling function instead of
+copy+pasting code, but I couldn't get it to work for some reason.
+-->
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+        <h3>
+            Instructions
+        </h3>
+        <p>
+            In this game, you will be put into a group with {{ C.PLAYERS_PER_GROUP_minus_one }} other players.
+            Each player will be assigned a color, either <span style="color: blue; font-weight: bold;">Blue</span> or
+            <span style="color: red; font-weight: bold;">Red</span>. With a color assigned to each player, all players
+            will then vote for one of the two colors.
+        </p>
+        <p>
+            Your winnings in this game depend on the coordination of your group. In order to receive points, <b>the entire
+            group must vote for the same color </b>.
+        </p>
+        <p>
+            When the vote is unanimous, your winnings depend on what color you were assigned at the beginning of the round.
+            For example, if you were assigned <span style="color: red; font-weight: bold;">Red</span> and every player voted
+            for <span style="color: red; font-weight: bold;">Red</span>, you would win <b>{{ C.payoff_agree_your_color }}</b>
+            points. If you were assigned <span style="color: blue; font-weight: bold;">Blue</span>, but every player voted
+            for <span style="color: red; font-weight: bold;">Red</span>, you would win <b>{{ C.payoff_agree_other_color }}</b>.
+        </p>
+        <p>
+            <u>If the vote is not unanimous, <b>{{ C.payoff_disagree }}</b> points are awarded to all players.</u>
+        </p>
+        <p>
+            You will play this game for {{ C.NUM_ROUNDS }} round.
+        </p>
+        <table class='table table-bordered text-center'
+            style='width: auto; margin: auto'>
+            <tr>
+                <th colspan=2 rowspan=2></th>
+                <th colspan=2>Unanimous Group Vote</th>
+            </tr>
+            <tr>
+                <th><span style="color: blue; font-weight: bold;">Blue</span></th>
+                <th><span style="color: red; font-weight: bold;">Red</span></th>
+            </tr>
+            <tr>
+                <th rowspan=2><span style="transform: rotate(-90deg);">Your Assigned Color</span></th>
+                <th><span style="color: blue; font-weight: bold;">Blue</span></th>
+                <td>{{ C.payoff_agree_your_color }}</td>
+                <td>{{ C.payoff_agree_other_color }}</td>
+            </tr>
+            <tr>
+                <th><span style="color: red; font-weight: bold;">Red</span></th>
+                <td>{{ C.payoff_agree_other_color }}</td>
+                <td>{{ C.payoff_agree_your_color }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+{{ endblock }}
+
+

@@ -1,0 +1,37 @@
+{{ block title }}
+    Results
+{{ endblock }}
+
+{{ block content }}
+<p>
+    This round, {{ group.count_blue }} players voted for <span style="color: blue; font-weight: bold;">Blue</span> and
+    {{ group.count_red }} players voted for <span style="color: red; font-weight: bold;">Red</span>.
+</p>
+
+<p>
+    {{ if group.count_sum == 5 }}
+        Because the vote was unanimous for <span style="color: blue; font-weight: bold;">Blue</span> and your
+        assigned color preference was
+            {{ if player.prefer_blue == 1 }}
+                <span style="color: blue; font-weight: bold;">Blue</span>
+            {{ else }}
+                <span style="color: red; font-weight: bold;">Red</span>
+            {{ endif }}
+        , you receive {{ player.payoff }}.
+    {{ elif group.count_sum == 0 }}
+        Because the vote was unanimous for <span style="color: red; font-weight: bold;">Red</span> and your
+        assigned color preference was
+            {{ if player.prefer_blue == 1 }}
+                <span style="color: blue; font-weight: bold;">Blue</span>
+            {{ else }}
+                 <span style="color: red; font-weight: bold;">Red</span>
+            {{ endif }}
+        , you receive {{ player.payoff }}.
+    {{ else }}
+        Because the vote was not unanimous, all players receive {{ C.payoff_disagree }} points.
+    {{ endif }}
+</p>
+
+{{ endblock }}
+
+
