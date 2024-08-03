@@ -8,7 +8,12 @@ SESSION_CONFIGS = [
         app_sequence=["coordination_game_skeleton"],
         num_demo_participants=5,
     ),
-
+    dict(
+        name='coordination_game_tutorial',
+        display_name="coordination_game_tutorial",
+        app_sequence=["coordination_game_tutorial"],
+        num_demo_participants=1,
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

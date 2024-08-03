@@ -1,0 +1,76 @@
+{{ block title }}
+    Practice Game Round {{ round_number }}
+{{ endblock }}
+
+{{ block content }}
+<style>
+    .button {
+        padding: 25px 25px;
+        text-align: center;
+        display: inline-block;
+        font-size: 25px;
+        color: white;
+        font-weight: bold;
+        margin: 0 25px;
+        border: none;
+        outline: none;
+    }
+    .button-blue {
+        background-color: blue;
+    }
+    .button-red {
+        background-color: red;
+    }
+</style>
+<p>
+    Your signal color for this round is
+        {{ if player.blue_signal }}
+            <span style="color: blue; font-weight: bold;">Blue</span>
+        {{ else }}
+            <span style="color: red; font-weight: bold;">Red</span>
+        {{ endif }}
+</p>
+
+<p>
+    Which color would you like to select?
+</p>
+
+<button name="color_choice" type="submit" value="True" class="button button-blue">Blue</button>
+<button name="color_choice" type="submit" value="False" class="button button-red">Red</button>
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+        <h3>
+            Practice Instructions
+        </h3>
+
+        <p>
+            In this practice game, the computer will assign you a color at the beginning, either
+            <span style="color: blue; font-weight: bold;">Blue</span> or <span style="color: red; font-weight: bold;">Red</span>.
+            You will then be given the option to select either
+            <span style="color: blue; font-weight: bold;">Blue</span> or <span style="color: red; font-weight: bold;">Red</span>
+            for 10 rounds of this game. <b>The goal of this game is to select the color that matches the color you were assigned
+            at the beginning of the game</b>. Your assigned color does not change between rounds. So, for example, if you were
+            assigned the color <span style="color: red; font-weight: bold;">Red</span>, your assigned color would be
+            <span style="color: red; font-weight: bold;">Red</span> in all 10 rounds.
+        </p>
+
+        <p>
+            The challenge of this game is that <b>you will not be told what color you were assigned at the beginning</b>. Instead,
+            at the beginning of each round, you will be given a <b>signal color</b> that indicates what your assigned color might
+            be. There is a 66% chance that the signal color will match the color you were assigned. Likewise, the is a 33% chance
+            that the signal color will be the opposite color.
+        </p>
+
+        <p>
+            When you select the color you were assigned at the beginning, you will receive {{ correct_points }} points. When you
+            select the color that does not match your assigned color, you will receive {{ incorrect_points }} points. You will
+            not be told how many points you have earned in this practice game until you finish all 10 rounds.
+        </p>
+    </div>
+</div>
+
+
+{{ endblock }}
+
+

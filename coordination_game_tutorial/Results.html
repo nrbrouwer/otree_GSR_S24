@@ -1,0 +1,57 @@
+{{ block title }}
+    Practice Results
+{{ endblock }}
+
+{{ block content }}
+<style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+</style>
+
+<p>
+    You earned a total of <b>{{ total_points }}</b> in this practice exercise out of a maximimum total points of <b>{{ possible_points }}</b>.
+</p>
+
+<p>
+    Below is a table which summarizes which color you were assigned at the beginning of the game, the signal given to you each round, and the choice you made given that signal.
+    Before progressing to the real game, please look over this table and consider any mistakes you may have made. When you are ready to move on, click the next button.
+</p>
+
+{{ next_button }}
+
+<table>
+    <thead>
+        <tr>
+            <th>Round Number</th>
+            <th>Assigned Color</th>
+            <th>Signal Color</th>
+            <th>Color Selected</th>
+            <th>Points Earned</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ for row in table_data }}
+        <tr>
+            <td>{{ row.round_number }}</td>
+            <td>{{ if row.prefer_blue }}<span style="color: blue; font-weight: bold;">Blue</span>{{ else }}<span style="color: red; font-weight: bold;">Red</span>{{ endif }}</td>
+            <td>{{ if row.blue_signal }}<span style="color: blue; font-weight: bold;">Blue</span>{{ else }}<span style="color: red; font-weight: bold;">Red</span>{{ endif }}</td>
+            <td>{{ if row.color_choice }}<span style="color: blue; font-weight: bold;">Blue</span>{{ else }}<span style="color: red; font-weight: bold;">Red</span>{{ endif }}</td>
+            <td>{{ row.payoff }}</td>
+        </tr>
+        {{ endfor }}
+    </tbody>
+</table>
+
+{{ endblock }}
+
+
